@@ -13,6 +13,7 @@ class ChatList(generics.ListCreateAPIView):
     serializer_class = ChatSerializer
 
     def list(self, request, *args, **kwargs):
+        # Could overwrite the get_queryset method instead
         queryset = self.filter_queryset(self.get_queryset())
 
         if request.user.id:
@@ -32,6 +33,8 @@ class ChatList(generics.ListCreateAPIView):
 class ChatDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
+    # Could override the IsAuthenticatedOrReadOnly permission class instead for IsOwnerOrReadOnly
+    # That way you'd require one permission less
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 

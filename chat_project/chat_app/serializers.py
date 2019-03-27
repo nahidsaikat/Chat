@@ -8,6 +8,8 @@ class ChatSerializer(serializers.ModelSerializer):
         fields = ('id', 'to_user', 'message')
 
     def validate(self, data):
+        # verify te initial data types by calling super
+        # super().validate(data)
         user = None
         request = self.context.get("request")
         if request and hasattr(request, "user"):
