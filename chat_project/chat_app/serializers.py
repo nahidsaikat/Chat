@@ -7,12 +7,10 @@ class ChatSerializer(serializers.ModelSerializer):
         model = Chat
         fields = ('id', 'to_user', 'message')
 
-    def validate(self, data):
-        # verify te initial data types by calling super
-        # super().validate(data)
+    def create(self, validated_data):
         user = None
         request = self.context.get("request")
         if request and hasattr(request, "user"):
             user = request.user
-        data['from_user'] = user
-        return data
+        validated_data['from_user'] = user
+        return super().create(validated_data)
