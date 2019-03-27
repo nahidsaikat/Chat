@@ -6,6 +6,11 @@ from rest_framework import generics
 
 
 class ChatList(generics.ListCreateAPIView):
+    """
+    Can user IsAuthenticated permission that way
+    you can be sure that a request user will always
+    be available in the class
+    """
     serializer_class = ChatSerializer
 
     def get_queryset(self):
@@ -22,7 +27,3 @@ class ChatDetail(generics.RetrieveUpdateDestroyAPIView):
     # Could override the IsAuthenticatedOrReadOnly permission class instead for IsOwnerOrReadOnly
     # That way you'd require one permission less
     permission_classes = (CustomIsAuthenticatedOrReadOnly,)
-
-
-
-
