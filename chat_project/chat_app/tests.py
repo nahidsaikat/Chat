@@ -5,5 +5,14 @@ def inc(x):
 
 
 def test_answer():
-    assert inc(3) == 5
+    assert inc(3) == 4
+
+class TestClass(object):
+    def test_one(self):
+        x = "this"
+        assert 'h' in x
+
+    def test_two(self):
+        x = "hello"
+        assert x == "hello"
 
